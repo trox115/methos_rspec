@@ -14,4 +14,12 @@ RSpec.describe Enumerable do
             expect(a.my_select { |v| v =~ /[aeiou]/ }).to eql(["a", "e"])
         end
     end
+    describe '#my_any' do
+        it "Returns true if any element have length 4 or more" do
+        expect(%w[ant bear cat].my_any? { |word| word.length >=4  }).to eql(true)
+    end
+    it "Returns false because none word has less than 1 char" do
+        expect(%w[ant bear cat].my_any? { |word| word.length <2}).to eql(false)
+        end
+end
 end
