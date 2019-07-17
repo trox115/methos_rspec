@@ -49,17 +49,20 @@ module Enumerable
     flag
   end
 
-  def my_count
-    just_counting = block_given?
-    if just_counting == false
-      i = 1
-      i += 1 until self[i].nil?
-      return i
-    else
+  def my_count(arg=nil)
+    if block_given?
       i = 0
       my_each do |x|
         i += 1 if yield x
       end
+    elsif arg != nil
+      i = 0
+      self.my_each do |x|
+        i += 1 if x == arg
+      end
+    else
+        i = 1
+        i += 1 until self[i].nil?
     end
     i
   end

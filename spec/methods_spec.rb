@@ -22,12 +22,39 @@ RSpec.describe Enumerable do
         end
     end
 
-    describe '#my_any' do
+    describe '#my_any?' do
         it "Returns true if any element have length 4 or more" do
-        expect(%w[ant bear cat].my_any? { |word| word.length >=4  }).to eql(true)
-    end
-    it "Returns false because none word has less than 1 char" do
-        expect(%w[ant bear cat].my_any? { |word| word.length <2}).to eql(false)
+            expect(%w[ant bear cat].my_any? { |word| word.length >=4  }).to eql(true)
+        end
+        it "Returns true if any element have length 10 or more" do
+            expect(%w[antsdfassfas bear cat].my_any? { |word| word.length >=10  }).to eql(true)
+        end
+        it "Returns true if any element is nil" do
+            expect(["antsdfassfas", "bear", nil].my_any? { |x| x == nil  }).to eql(false)
+        end
+        it "Returns true if any element is nil" do
+            expect(%w[nil bear 12].my_any? { |x| x == nil  }).to eql(false)
+        end
+        it "Returns true beacause ever returns a value other than false or nil" do
+            expect(%w[false false nil].my_any? { |x| x }).to eql(true)
+        end
+        it "Returns false because none word has less than 1 char" do
+            expect(%w[ant bear cat].my_any? { |word| word.length <2}).to eql(false)
         end
     end
+    describe '#my_none?' do
+        it "Returns true because the strings never have more than 4 letters" do
+            expect(%w[asd ads kjl ela].my_none?{|word| word.length >= 4}).to eql(true)
+        end
+        it "Returns false because one of the strings has more than 4 letters" do
+            expect(%w[asd adss kjl ela].my_none?{|word| word.length >= 4}).to eql(false)
+        end
+        it "Returns true because the items are not false" do
+            expect(%w[asd ads kjl ela].my_none?{|x| x == false }).to eql(true)
+        end
+        it "Returns false because the items are not false" do
+            expect(%w[asd ads kjl ela 0].my_none?{|x| x == false }).to eql(true)
+        end
+    end
+    
 end
