@@ -56,5 +56,16 @@ RSpec.describe Enumerable do
             expect(%w[asd ads kjl ela 0].my_none?{|x| x == false }).to eql(true)
         end
     end
+    describe '#my_count' do
+        it "Returns the count of the elements of an array" do
+            expect([1,2,3].my_count).to eql(3)
+        end
+        it "Returns the count of the elements in the array that matches the argument" do
+            expect([1,2,3].my_count(2)).to eql(1)
+        end
+        it "Returns the count or the elements that the block returns true" do
+            expect([1,2,3,4,5,6].my_count{|x| x.even?}).to eql(3)
+        end
+    end
     
 end
