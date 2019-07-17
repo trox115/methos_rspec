@@ -90,39 +90,3 @@ module Enumerable
     aux / minus
   end
 end
-
-myarray = [0, 1, 3, 10, 5]
-
-# myarray.each{ |x| puts x }
-# myarray.my_each { |x| puts x }
-
-# myarray.each_with_index{|x, i| puts i.to_s+" "+x.to_s}
-# myarray.my_each_with_index{|x,i| puts i.to_s+" "+x.to_s}
-
-# print myarray.select(&:even?)
-# print myarray.my_select {  |num| num > 2  }
-
-# print myarray.all? {  |num| num >= 2  }
-# print myarray.my_all? {  |num| num >= 0  }
-
-# print myarray.any? {  |num| num >= 10 }
-# print myarray.my_any? { |num| num == 10 }
-
-# print myarray.none? { |num| num >= 10 }
-# print myarray.my_none? { |num| num >= 10 }
-
-# print myarray.my_count(&:even?) #=>
-# print myarray.count(&:even?) #=>
-
-# print myarray.my_map{ |i| i*i }
-# print myarray.map{ |i| i*i }
-# print myarray.inject { |aux, x| aux * x }
-# print myarray.my_inject { |aux, x| aux * x }
-def multiply_els(array)
-  array.my_inject { |aux, x| aux * x }
-end
-puts multiply_els([2, 4, 5]) #=> 40
-
-my_proc = proc { |i| i + i }
-print myarray.my_map(my_proc)
-# print myarray.map {|i| i+i}
