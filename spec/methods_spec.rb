@@ -80,6 +80,12 @@ RSpec.describe Enumerable do
         it "Returns numbers 1 to 3 multiplied by 2 taking an array" do
             expect([1,2,3].my_map { |i| i*2 } ).to eql([2,4,6])
         end
+        it "test my map with empty array" do
+            expect([].my_map { |i| i*2 } ).to eql([])
+        end
+        it "with one element range" do
+            expect((1..1).my_map { |i| i*2 } ).to eql([2])
+        end
     end
     
 end
