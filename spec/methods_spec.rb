@@ -67,5 +67,19 @@ RSpec.describe Enumerable do
             expect([1,2,3,4,5,6].my_count{|x| x.even?}).to eql(3)
         end
     end
+    describe '#my_map' do
+        it "Returns the power of numbers 1 to 4" do
+            expect((1..4).my_map { |i| i*i } ).to eql([1, 4, 9, 16])
+        end
+        it "Returns numbers 1 to 3 multiplied by 2" do
+            expect((1..3).my_map { |i| i*2 } ).to eql([2,4,6])
+        end
+        it "Returns the power of numbers 1 to 4 taking an array" do
+            expect([1,2,3,4].my_map { |i| i*i } ).to eql([1, 4, 9, 16])
+        end
+        it "Returns numbers 1 to 3 multiplied by 2 taking an array" do
+            expect([1,2,3].my_map { |i| i*2 } ).to eql([2,4,6])
+        end
+    end
     
 end

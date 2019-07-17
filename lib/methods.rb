@@ -1,11 +1,16 @@
 module Enumerable
   def my_each
+    if self.class == Range
+      arr = self.to_a
+    else
+      arr = self
+    end
     i = 0
-    until self[i].nil?
-      yield(self[i])
+    until arr[i].nil?
+      yield(arr[i])
       i += 1
     end
-    self
+    arr
   end
 
   def my_each_with_index
