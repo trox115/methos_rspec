@@ -24,10 +24,22 @@ RSpec.describe Enumerable do
 
     describe '#my_any' do
         it "Returns true if any element have length 4 or more" do
-        expect(%w[ant bear cat].my_any? { |word| word.length >=4  }).to eql(true)
-    end
-    it "Returns false because none word has less than 1 char" do
-        expect(%w[ant bear cat].my_any? { |word| word.length <2}).to eql(false)
+            expect(%w[ant bear cat].my_any? { |word| word.length >=4  }).to eql(true)
+        end
+        it "Returns true if any element have length 10 or more" do
+            expect(%w[antsdfassfas bear cat].my_any? { |word| word.length >=10  }).to eql(true)
+        end
+        it "Returns true if any element is nil" do
+            expect(["antsdfassfas", "bear", nil].my_any? { |x| x == nil  }).to eql(false)
+        end
+        it "Returns true if any element is nil" do
+            expect(%w[nil bear 12].my_any? { |x| x == nil  }).to eql(false)
+        end
+        it "Returns true beacause ever returns a value other than false or nil" do
+            expect(%w[false false nil].my_any? { |x| x }).to eql(true)
+        end
+        it "Returns false because none word has less than 1 char" do
+            expect(%w[ant bear cat].my_any? { |word| word.length <2}).to eql(false)
         end
     end
 end
