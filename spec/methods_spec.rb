@@ -8,6 +8,9 @@ RSpec.describe Enumerable do
         it "Takes an empty array and returns empty array" do
             expect([].my_each{|x| x}).to eql([])
         end
+        it " Accepts Range" do
+            expect((1..5).my_each{|x| x}).to eql([1,2,3,4,5])
+        end
     end
     describe '#my_select' do
         it "Returns all even numbers." do
