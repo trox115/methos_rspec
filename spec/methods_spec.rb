@@ -22,7 +22,7 @@ RSpec.describe Enumerable do
         end
     end
 
-    describe '#my_any' do
+    describe '#my_any?' do
         it "Returns true if any element have length 4 or more" do
             expect(%w[ant bear cat].my_any? { |word| word.length >=4  }).to eql(true)
         end
@@ -42,4 +42,19 @@ RSpec.describe Enumerable do
             expect(%w[ant bear cat].my_any? { |word| word.length <2}).to eql(false)
         end
     end
+    describe '#my_none?' do
+        it "Returns true because the strings never have more than 4 letters" do
+            expect(%w[asd ads kjl ela].my_none?{|word| word.length >= 4}).to eql(true)
+        end
+        it "Returns false because one of the strings has more than 4 letters" do
+            expect(%w[asd adss kjl ela].my_none?{|word| word.length >= 4}).to eql(false)
+        end
+        it "Returns true because the items are not false" do
+            expect(%w[asd ads kjl ela].my_none?{|x| x == false }).to eql(true)
+        end
+        it "Returns false because the items are not false" do
+            expect(%w[asd ads kjl ela 0].my_none?{|x| x == false }).to eql(true)
+        end
+    end
+    
 end
