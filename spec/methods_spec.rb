@@ -107,7 +107,7 @@ RSpec.describe Enumerable do
             expect(arraydif.my_each_with_index {|x, i|  arraydif[i]=x}).to eql([1,"1",false,nil,"hello",true])
         end
     end
-    describe '#my_inyect'do
+    describe '#my_inject'do
         let(:array){ (5..10).to_a }
         let(:myrange) { (5..10) }
         it 'applies a sum especified by a block' do
@@ -125,5 +125,27 @@ RSpec.describe Enumerable do
         it 'passing an array with nil' do
             expect([nil].my_inject{ |sum, n| sum + n }).to eql(0)
         end
+    end
+
+    describe '#my_all?' do
+        let(:array) {Array.new(%w[ant bear cats])}
+        let(:array2) {Array.new(%w[ants bears cats])}
+        let(:array3) {[1,2,3,4,5]}
+        
+        it "Testing with an array of elements with length 4" do
+            expect(array2.my_all? { |word| word.length >=4  }).to eql(true)
+        end
+
+        it "Testing with an array of elements with length 3" do
+            expect(array.my_all? { |word| word.length >=4  }).to eql(false)
+        end
+
+        it "All the values are not integers" do
+            expect(array.my_all? { |i| i.class == Integer }).to eql(false)
+        end
+        it "All the values are integers" do
+            expect(array3.my_all? { |i| i.class == Integer }).to eql(true)
+        end
+        
     end
 end
