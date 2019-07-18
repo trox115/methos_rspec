@@ -130,6 +130,7 @@ RSpec.describe Enumerable do
     describe '#my_all?' do
         let(:array) {Array.new(%w[ant bear cats])}
         let(:array2) {Array.new(%w[ants bears cats])}
+        let(:array3) {[1,2,3,4,5]}
         
         it "Testing with an array of elements with length 4" do
             expect(array2.my_all? { |word| word.length >=4  }).to eql(true)
@@ -137,6 +138,13 @@ RSpec.describe Enumerable do
 
         it "Testing with an array of elements with length 3" do
             expect(array.my_all? { |word| word.length >=4  }).to eql(false)
+        end
+
+        it "All the values are not integers" do
+            expect(array.my_all? { |i| i.class == Integer }).to eql(false)
+        end
+        it "All the values are integers" do
+            expect(array3.my_all? { |i| i.class == Integer }).to eql(true)
         end
         
     end
