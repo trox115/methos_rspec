@@ -70,6 +70,7 @@ RSpec.describe Enumerable do
             expect([1,2,3,4,5,6].my_count{|x| x.even?}).to eql(3)
         end
     end
+
     describe '#my_map' do
         it "Returns the power of numbers 1 to 4" do
             expect((1..4).my_map { |i| i*i } ).to eql([1, 4, 9, 16])
@@ -90,5 +91,61 @@ RSpec.describe Enumerable do
             expect((1..1).my_map { |i| i*2 } ).to eql([2])
         end
     end
-    
+    describe '#my_each_with_index' do
+        let(:array) { Array.new([1,2,3]) }
+        let(:arraydif) { Array.new([1,"1",false,nil,"hello",true]) }
+       
+        it "returns the numbers in the array and it's Index" do
+            expect(array.my_each_with_index {|x, i|  array[i]=x*2}).to eql([2,4,6])
+        end
+
+        it "returns the Index of the array numbers" do
+            expect(array.my_each_with_index {|x, i|  array[i]=i}).to eql([0,1,2])
+        end
+        
+        it "returns the different type arguments" do
+            expect(arraydif.my_each_with_index {|x, i|  arraydif[i]=x}).to eql([1,"1",false,nil,"hello",true])
+        end
+    end
+    describe '#my_inject'do
+        let(:array){ (5..10).to_a }
+        let(:myrange) { (5..10) }
+        it 'applies a sum especified by a block' do
+            expect(array.my_inject { |sum, n| sum + n }).to eql(45)
+        end
+        it 'applies a multiplication especified by a block' do
+            expect(array.my_inject { |sum, n| sum * n }).to eql(151200)
+        end
+        it 'applies a sum using range' do
+            expect(myrange.my_inject{ |sum, n| sum + n }).to eql(45)
+        end
+        it 'passing an empty array' do
+            expect([].my_inject{ |sum, n| sum + n }).to eql(0)
+        end
+        it 'passing an array with nil' do
+            expect([nil].my_inject{ |sum, n| sum + n }).to eql(0)
+        end
+    end
+
+    describe '#my_all?' do
+        let(:array) {Array.new(%w[ant bear cats])}
+        let(:array2) {Array.new(%w[ants bears cats])}
+        let(:array3) {[1,2,3,4,5]}
+        
+        it "Testing with an array of elements with length 4" do
+            expect(array2.my_all? { |word| word.length >=4  }).to eql(true)
+        end
+
+        it "Testing with an array of elements with length 3" do
+            expect(array.my_all? { |word| word.length >=4  }).to eql(false)
+        end
+
+        it "All the values are not integers" do
+            expect(array.my_all? { |i| i.class == Integer }).to eql(false)
+        end
+        it "All the values are integers" do
+            expect(array3.my_all? { |i| i.class == Integer }).to eql(true)
+        end
+        
+    end
 end
