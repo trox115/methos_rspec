@@ -70,6 +70,7 @@ RSpec.describe Enumerable do
             expect([1,2,3,4,5,6].my_count{|x| x.even?}).to eql(3)
         end
     end
+
     describe '#my_map' do
         it "Returns the power of numbers 1 to 4" do
             expect((1..4).my_map { |i| i*i } ).to eql([1, 4, 9, 16])
@@ -90,5 +91,20 @@ RSpec.describe Enumerable do
             expect((1..1).my_map { |i| i*2 } ).to eql([2])
         end
     end
-    
+    describe '#my_each_with_index' do
+        let(:array) { Array.new([1,2,3]) }
+        let(:arraydif) { Array.new([1,"1",false,nil,"hello",true]) }
+       
+        it "returns the numbers in the array and it's Index" do
+            expect(array.my_each_with_index {|x, i|  array[i]=x*2}).to eql([2,4,6])
+        end
+
+        it "returns the Index of the array numbers" do
+            expect(array.my_each_with_index {|x, i|  array[i]=i}).to eql([0,1,2])
+        end
+        
+        it "returns the different type arguments" do
+            expect(arraydif.my_each_with_index {|x, i|  arraydif[i]=x}).to eql([1,"1",false,nil,"hello",true])
+        end
+    end
 end

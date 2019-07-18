@@ -18,6 +18,7 @@ module Enumerable
     until self[i].nil?
       yield(self[i], i)
       i += 1
+     
     end
     self
   end
