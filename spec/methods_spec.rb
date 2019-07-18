@@ -2,14 +2,15 @@ require 'methods'
 
 RSpec.describe Enumerable do
     describe "#my_each" do
+        let(:array) {[1,2,3]}
         it "Takes a block as argument" do
-            expect([1,2,3].my_each {|x| x}).to eql([1,2,3])
+            expect(array.my_each {|x| x}).to eql(array)
         end
         it "Takes an empty array and returns empty array" do
             expect([].my_each{|x| x}).to eql([])
         end
         it " Accepts Range" do
-            expect((1..5).my_each{|x| x}).to eql([1,2,3,4,5])
+            expect((1..3).my_each{|x| x}).to eql(array)
         end
     end
     describe '#my_select' do
@@ -46,14 +47,15 @@ RSpec.describe Enumerable do
         end
     end
     describe '#my_none?' do
+        let(:array){ %w[asd ads kjl ela] }
         it "Returns true because the strings never have more than 4 letters" do
-            expect(%w[asd ads kjl ela].my_none?{|word| word.length >= 4}).to eql(true)
+            expect(array.my_none?{|word| word.length >= 4}).to eql(true)
         end
         it "Returns false because one of the strings has more than 4 letters" do
             expect(%w[asd adss kjl ela].my_none?{|word| word.length >= 4}).to eql(false)
         end
         it "Returns true because the items are not false" do
-            expect(%w[asd ads kjl ela].my_none?{|x| x == false }).to eql(true)
+            expect(array.my_none?{|x| x == false }).to eql(true)
         end
         it "Returns false because the items are not false" do
             expect(%w[asd ads kjl ela 0].my_none?{|x| x == false }).to eql(true)
