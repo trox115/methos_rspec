@@ -91,11 +91,16 @@ module Enumerable
   end
 
   def my_inject
-    aux = self[0]
-    minus = self[0]
-    my_each do |x|
-      aux = yield(aux, x)
+    first = true
+    sum = 0
+    self.my_each do | n |
+        if first
+            sum = n
+            first = false
+        else
+            sum = yield(sum , n)
+        end
     end
-    aux / minus
+    return sum
   end
 end

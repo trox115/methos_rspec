@@ -107,4 +107,23 @@ RSpec.describe Enumerable do
             expect(arraydif.my_each_with_index {|x, i|  arraydif[i]=x}).to eql([1,"1",false,nil,"hello",true])
         end
     end
+    describe '#my_inyect'do
+        let(:array){ (5..10).to_a }
+        let(:myrange) { (5..10) }
+        it 'applies a sum especified by a block' do
+            expect(array.my_inject { |sum, n| sum + n }).to eql(45)
+        end
+        it 'applies a multiplication especified by a block' do
+            expect(array.my_inject { |sum, n| sum * n }).to eql(151200)
+        end
+        it 'applies a sum using range' do
+            expect(myrange.my_inject{ |sum, n| sum + n }).to eql(45)
+        end
+        it 'passing an empty array' do
+            expect([].my_inject{ |sum, n| sum + n }).to eql(0)
+        end
+        it 'passing an array with nil' do
+            expect([nil].my_inject{ |sum, n| sum + n }).to eql(0)
+        end
+    end
 end
