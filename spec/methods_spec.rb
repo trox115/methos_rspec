@@ -122,5 +122,8 @@ RSpec.describe Enumerable do
         it 'passing an empty array' do
             expect([].my_inject{ |sum, n| sum + n }).to eql(0)
         end
+        it 'passing an array with nil' do
+            expect([nil].my_inject{ |sum, n| sum + n }).to eql(0)
+        end
     end
 end
